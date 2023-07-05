@@ -48,8 +48,7 @@ public class Pessoa {
 	
 	public static int criaRegistro() throws SQLException, ClassNotFoundException {
 		while(true) {
-			String msg = "SGEU";
-			Connection conexao = ConnectionFactory.criarConexao(msg);
+			Connection conexao = ConnectionFactory.criarConexao("SGEU");
 			String sql = "SELECT registro from pessoa";
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ArrayList<Integer> lista = new ArrayList<Integer>();
@@ -64,5 +63,10 @@ public class Pessoa {
 				return rand;
 			}
 		}
+	}
+	
+	public static Pessoa retornaPessoa(int registro, String login, String senha) {
+		return null;
+		
 	}
 }

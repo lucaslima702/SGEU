@@ -26,6 +26,10 @@ public class Database {
 		}
 	}
 	
+	public static void deletaPessoa(int registro) throws SQLException, ClassNotFoundException {
+		//String sql ...
+	}
+	
 	public static void mostraAlunos() throws SQLException, ClassNotFoundException{
 		try {
 			String sql = "select nome from pessoa where categoria = nome";
