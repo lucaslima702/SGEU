@@ -1,11 +1,12 @@
 package SistemaDeGestaoEscolarUniversitaria;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Tarefas {
 	static Scanner teclado = new Scanner(System.in);
 	
-	public static void adicionaTarefa(Pessoa pessoa) {
-		if(Database.verificacaoDeLogin(pessoa.getLogin(), pessoa.getSenha(), pessoa)) {
+	public static void adicionaTarefa(Pessoa pessoa) throws ClassNotFoundException, SQLException {
+		if(Database.verificacaoDeLogin(pessoa.getRegistro(), pessoa.getLogin(), pessoa.getSenha())) {
 			System.out.println("Digite o nome da tarefa");
 			String nomeDaTarefa = teclado.next();
 			Database.adicionaTarefa(nomeDaTarefa, pessoa);

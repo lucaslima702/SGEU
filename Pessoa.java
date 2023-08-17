@@ -65,8 +65,24 @@ public class Pessoa {
 		}
 	}
 	
-	public static Pessoa retornaPessoa(int registro, String login, String senha) {
-		return null;
-		
+	public static Pessoa retornaPessoa(int registro) throws ClassNotFoundException, SQLException {
+		Connection conexao = ConnectionFactory.criarConexao("SGEU");
+		int registroPessoa = 0;
+		String nomePessoa = null;
+		String loginPessoa = null;
+		String senhaPessoa = null;
+		String categoriaPessoa = null;
+		String sql = "SELECT * from pessoa where registro = " + registro;
+		PreparedStatement ps = conexao.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery(sql);
+		while(rs.next()) {
+			registroPessoa = rs.getInt("registro");
+			nomePessoa = rs.getString("nome");
+			loginPessoa = rs.getString("login");
+			senhaPessoa = rs.getString("senha");
+			categoriaPessoa = rs.getString("categoria");
+		}
+		Pessoa pessoa = new Pessoa(nomePessoa, registroPessoa, loginPessoa, senhaPessoa, categoriaPessoa);
+		return pessoa;
 	}
 }

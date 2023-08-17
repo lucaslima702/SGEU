@@ -27,7 +27,11 @@ public class Database {
 	}
 	
 	public static void deletaPessoa(int registro) throws SQLException, ClassNotFoundException {
-		//String sql ...
+		try {
+			String sql = "delete from pessoa where registro = " + registro;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void mostraAlunos() throws SQLException, ClassNotFoundException{
@@ -45,15 +49,20 @@ public class Database {
 		}
 	}
 	
-	public static boolean verificacaoDeLogin(String login, String senha, Pessoa pessoa) {
+	
+	public static boolean verificacaoDeLogin(int registro, String login, String senha) throws ClassNotFoundException, SQLException {
+		boolean confirmacao = false;
+		Pessoa pessoa = Pessoa.retornaPessoa(registro);
 		if(pessoa.getLogin() == login && pessoa.getSenha() == senha) {
-			return true;
+			confirmacao = true;
+			System.out.println("Validado");
 		}else {
-			return false;
+			System.out.println("Nao validado");
 		}
+		return confirmacao;
 	}
 
 	public static void adicionaTarefa(String nomeDaTarefa, Pessoa pessoa) {
-		// TODO Auto-generated method stub	
+		
 	}
 }

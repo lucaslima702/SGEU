@@ -23,8 +23,14 @@ public class Aluno extends Pessoa{
 	}
 	
 	public static void deletaAluno() throws SQLException, ClassNotFoundException {
-		System.out.println("Qual o registro do aluno");
+		System.out.println("Qual o registro da pessoa");
 		int registro = teclado.nextInt();
+		System.out.println("Qual o login dessa pessoa?");
+		String login = teclado.next();
+		System.out.println("Qual a senha?");
+		String senha = teclado.next();
+		if(Database.verificacaoDeLogin(registro, login, senha)) {
+			Database.deletaPessoa(registro);
+		}
 	}
 }
-
