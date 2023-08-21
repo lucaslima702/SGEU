@@ -9,7 +9,7 @@ public class Tarefas {
 		if(Database.verificacaoDeLogin(pessoa.getRegistro(), pessoa.getLogin(), pessoa.getSenha())) {
 			System.out.println("Digite o nome da tarefa");
 			String nomeDaTarefa = teclado.next();
-			Database.adicionaTarefa(nomeDaTarefa, pessoa);
+			Database.adicionaTarefa(nomeDaTarefa, pessoa.getRegistro());
 			System.out.println("Tarefa: " + nomeDaTarefa + " adicionada com sucesso !");
 		}else{
 			System.out.println("Autenticação de login falhou, tente novamente.");

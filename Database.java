@@ -21,6 +21,7 @@ public class Database {
 			Connection conexao = ConnectionFactory.criarConexao("SGEU");
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			int rs = ps.executeUpdate();
+			criaRegistroTarefas(pessoa.getRegistro());
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -29,14 +30,17 @@ public class Database {
 	public static void deletaPessoa(int registro) throws SQLException, ClassNotFoundException {
 		try {
 			String sql = "delete from pessoa where registro = " + registro;
-		}catch (Exception e) {
+			Connection conexao = ConnectionFactory.criarConexao("SGEU");
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			int rs = ps.executeUpdate();
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public static void mostraAlunos() throws SQLException, ClassNotFoundException{
 		try {
-			String sql = "select nome from pessoa where categoria = nome";
+			String sql = "select nome from pessoa where categoria = 'aluno'";			
 			Connection conexao = ConnectionFactory.criarConexao("SGEU");
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -53,7 +57,7 @@ public class Database {
 	public static boolean verificacaoDeLogin(int registro, String login, String senha) throws ClassNotFoundException, SQLException {
 		boolean confirmacao = false;
 		Pessoa pessoa = Pessoa.retornaPessoa(registro);
-		if(pessoa.getLogin() == login && pessoa.getSenha() == senha) {
+		if(pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {
 			confirmacao = true;
 			System.out.println("Validado");
 		}else {
@@ -61,8 +65,26 @@ public class Database {
 		}
 		return confirmacao;
 	}
+	
+	public static void criaRegistroTarefas(int registro) throws ClassNotFoundException {
+		try {
+			String sql = "create table r" + registro + "(tarefa varchar(30))";
+			Connection conexao = ConnectionFactory.criarConexao("tarefas");
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			int rs = ps.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-	public static void adicionaTarefa(String nomeDaTarefa, Pessoa pessoa) {
-		
+	public static void adicionaTarefa(String nomeDaTarefa, int registro) throws ClassNotFoundException, SQLException {
+		try {
+			String sql = "insert into " + registro + " '" + nomeDaTarefa + "'";
+			Connection conexao = ConnectionFactory.criarConexao("tarefas");
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			int rs = ps.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class Aluno extends Pessoa{
 	static Scanner teclado = new Scanner(System.in);
 	static String categoria = "aluno";
+	
 	public Aluno(String nome, int registro, String login, String senha) {
 		super(nome, registro, login, senha, categoria);
-		
 	}	
+	
 	public static void criaAluno() throws SQLException, ClassNotFoundException {
 		System.out.println("Qual o nome do aluno?");
 		String nome = teclado.next();
