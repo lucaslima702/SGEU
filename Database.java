@@ -79,10 +79,34 @@ public class Database {
 
 	public static void adicionaTarefa(String nomeDaTarefa, int registro) throws ClassNotFoundException, SQLException {
 		try {
-			String sql = "insert into " + registro + " '" + nomeDaTarefa + "'";
+			String sql = "insert into r" + registro + " (tarefa) VALUE ('" + nomeDaTarefa + "')";
 			Connection conexao = ConnectionFactory.criarConexao("tarefas");
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			int rs = ps.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void removeTarefa(String nomeDaTarefa, int registro) throws ClassNotFoundException, SQLException {
+		try {
+			String sql = "delete from r" + registro + " where tarefa = '" + nomeDaTarefa + "'";
+			Connection conexao = ConnectionFactory.criarConexao("tarefas");
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			int rs = ps.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void mostraTarefas(int registro) throws ClassNotFoundException, SQLException {
+		try {
+			String sql = "select * from r" + registro;
+			Connection conexao = ConnectionFactory.criarConexao("tarefas");
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String nome = rs.getString("tarefa");
+				System.out.println(nome);
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

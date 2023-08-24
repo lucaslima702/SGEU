@@ -16,14 +16,11 @@ public class Tarefas {
 		}
 	}
 	
-	public static void concluiTarefa(String nomeDaTarefaParaConcluir, Pessoa pessoa) {
-		//if(pessoas.tarefas.contains(nomeDaTarefaParaConcluir){
-		//db.apagaTarefa(nomeDaTarefaParaConcluir);
-		//else{
-		//sysout("Essa tarefa não existe, tente novamente");
-	}
-	
-	public static void mostraTarefas(Pessoa pessoa) {
-		
+	public static void concluiTarefa(String nomeDaTarefaParaConcluir, Pessoa pessoa) throws ClassNotFoundException, SQLException {
+		if(Database.verificacaoDeLogin(pessoa.getRegistro(), pessoa.getLogin(), pessoa.getSenha())){
+			System.out.println("Digite o nome da tarefa que deseja concluir");
+			String nomeDaTarefa = teclado.next();
+			Database.removeTarefa("nomeDaTarefa", pessoa.getRegistro());
+		}
 	}
 }
