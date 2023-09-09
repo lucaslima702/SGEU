@@ -66,7 +66,7 @@ public class Pessoa {
 	}
 	
 	public static Pessoa retornaPessoa(int registro) throws ClassNotFoundException, SQLException {
-		Connection conexao = ConnectionFactory.criarConexao("SGEU");
+		Connection conexao = ConnectionFactory.criarConexao("sgeu");
 		int registroPessoa = 0;
 		String nomePessoa = null;
 		String loginPessoa = null;

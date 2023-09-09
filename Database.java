@@ -10,7 +10,7 @@ public class Database {
 	
 	public static PreparedStatement abreConexao(String msg) throws SQLException, ClassNotFoundException {		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		Connection connection = connectionFactory.criarConexao("SGEU");
+		Connection connection = connectionFactory.criarConexao(msg);
 		PreparedStatement stm = connection.prepareStatement(msg);
 		return stm;
 	}
@@ -53,8 +53,8 @@ public class Database {
 		}
 	}
 	
-	
 	public static boolean verificacaoDeLogin(int registro, String login, String senha) throws ClassNotFoundException, SQLException {
+		abreConexao("sgeu");
 		boolean confirmacao = false;
 		Pessoa pessoa = Pessoa.retornaPessoa(registro);
 		if(pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {

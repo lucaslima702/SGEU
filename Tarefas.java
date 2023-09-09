@@ -16,7 +16,7 @@ public class Tarefas {
 		}
 	}
 	
-	public static void concluiTarefa(String nomeDaTarefaParaConcluir, Pessoa pessoa) throws ClassNotFoundException, SQLException {
+	public static void concluiTarefa(Pessoa pessoa) throws ClassNotFoundException, SQLException {
 		if(Database.verificacaoDeLogin(pessoa.getRegistro(), pessoa.getLogin(), pessoa.getSenha())){
 			System.out.println("Digite o nome da tarefa que deseja concluir");
 			String nomeDaTarefa = teclado.next();
